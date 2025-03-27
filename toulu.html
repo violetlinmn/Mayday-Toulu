@@ -82,7 +82,7 @@
     <div id="text-display" class="hidden"></div>
     
     <audio id="bg-music" loop>
-        <source src="https://github.com/violetlinmn/music/raw/refs/heads/main/Mayday-Toulu.mp3" type="audio/mpeg">
+        <source src="https://github.com/violetlinmn/Mayday-Toulu/raw/refs/heads/main/Mayday-Toulu.mp3" type="audio/mpeg">
     </audio>
 
     <script>
@@ -117,6 +117,8 @@
         ];
 
         loginBtn.addEventListener('click', function() {
+            // Play the background music
+            bgMusic.play()
             
             // Hide login button
             document.querySelector('.login-container').classList.add('hidden');
@@ -135,17 +137,8 @@
                     }
                 }, 500); // Display a line every 500 milliseconds
 
-
             // Play the background music
-            bgMusic.play().catch(e => {
-                console.log("Autoplay blocked:", e);
-                // Show play button if autoplay is blockeds
-                const playBtn = document.createElement('button');
-                playBtn.textContent = "Click to play the music";
-                playBtn.style.marginTop = "10px";
-                playBtn.onclick = () => bgMusic.play();
-                document.querySelector('.login-container').appendChild(playBtn);
-            });
+            bgMusic.play()
             
         });
 
