@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayday Land</title>
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000000;
+            margin: 0;
+            flex-direction: column;
+        }
+        
+        .beginning {
+            font-family: 'Courier', monospace;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .login-container {
+            font-family: 'Courier', monospace;
+            position: relative;
+            top:auto;
+            text-align: left;
+        }
+        
+        #login-btn {
+            background-color:aqua;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        #login-btn:hover {
+            background-color: #b5bcb5;
+        }
+        
+        #text-display {
+            font-family: 'Courier', monospace;
+            font-size: 20px;
+            color:white;
+            line-height: 1.5;
+            text-align: center;
+            min-height: auto;
+            width: 100%;
+            white-space: pre;
+            word-wrap: normal;
+            overflow: hidden;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="beginning">
+        <h3 style="color:white">歡迎光臨 <span style="color:red">5525回到那一天</span> 目前共有<span style="color:aqua"> 55255 </span>人上綫</h3>
+        <h3 style="color:white">▷ 正在播放：透露-五月天</h3>
+    </div>
+
+    <div class="login-container">
+        <button id="login-btn">CLICK TO PLAY</button>
+    </div>
+
+    <div id="text-display" class="hidden"></div>
+
+    <audio id="bg-music" loop preload="auto">
+        <source src="/【4K】《透露》五月天 Fly To 2025 线上跨年演唱会 - 1.【4K】《透露》五月天 Fly To 2025 线上跨年演唱会.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const loginBtn = document.getElementById('login-btn');
+        const textDisplay = document.getElementById('text-display');
+        const bgMusic = document.getElementById('bg-music');
+            
+        // "draw" my pattern
+        const patternLines = [
+            `           ::::::::::'.d$N.^''...:::db.^'::::::::::.                                                  #                  `,
+            `          .::::::::: *#' ::::::::'z$$$$$bo.'''::::::                                            #    # #    #            `,
+            `          :::::::''..-:::::::: 'u$$$$$$$$$$$$bu ':::                                            # ## #  # ###            `,
+            `         ::::::'.::::::::::'.ud$$$$$$$$$$$$$$$$$  :'                                            #   ##  ##  #            `,
+            `         ::::: ::::::::' .ud$$$$$$$$$$$$$$$&eeuJ> :                                             #   # ## #  #            `,
+            `       . '::::::::::: xd$$$$R'Lued$$$$$$$$$$$$$$>.:                                             # ##  ##  ###            `,
+            `     ::::.::::::::::. 9$$$$Fz$$$$$$$$$$$$$$$$F'' .:                                                                      `,
+            `    ::::::::::::::::::'$$$$u$$$F' ''$$$$$$$$.ut  '::                                              歡 迎 光 臨             `,
+            `    :::::::::::::::::::'$$$$$FsKxL. 9$$$$$$$edNeo :::                                      5525 回到那一天 BBS 站         `,
+            `    :::::::::::::::::::'$$$$$FsKxL. 9$$$$$$$edNeo :::                                     Welcome to #5525 LIVE TOUR     `,
+            `     ':::::::::::::::::: 4$$$$$b$euud$$$$$$$$$$$$$  : %%%                              ********************************  `,     
+            `%:%: '::: :::::::::::::: $$$$$$$$$$$$$$$$$$?$$$$$>  %%%%                                        Since 1997.3.29          `,
+            `%%%%%     ::::::::::::: .$$$$$$$$$$$$$$$$I$u$$$$$> %%%%                                   本站開放 5521-5525 等五個port   `,
+            `%%%%%%%:  ::::::::::::' d$$$$$$$$$$$$$$$R???'7$$F %%%%                                              歡迎多加利用          `,
+            ` % %%%%%%  ::::::::::'.$$$$$$$$$$$$$b.-m$$* d$$F %%%'                                                                    `,
+            `     %%%%%.  :::::::: t$$$$$$$$$$$$$$$bu..o$$$'.%%'                                                                      `,
+            `      '%%%%%%.   :::: '$$$$$$$$$$$$$$$$$$$$$F':%%                                                ┌─────┐      ┌───┐      `,
+            `      's.'%%%%%%%%::.  $$$$$$$$o.''???$$R?F.:%%%                                         ┌─────┐ │┌───┐│      │   │      `,
+            `        '$eu. %%%%%%% '$$$$$$$$$$$$er /%%%%%%%/                                          │     └─┘└───┘└──┐   │    ⟍     `,
+            `          '?$$eu. %%% t$$$$$$$$$$$$$! %%%%%%%%                                           │                │   │      ⟍   `,
+            `                                                                                         │                └───┘        ⟍ `,
+            ` `,
+        ];
+
+        loginBtn.addEventListener('click', function() {
+            
+            // Hide login button
+            document.querySelector('.login-container').classList.add('hidden');
+            
+            // Display text area
+            textDisplay.classList.remove('hidden');
+            
+            // Display text line by line
+                let currentLine = 0;
+                const interval = setInterval(() => {
+                    if (currentLine < patternLines.length) {
+                        textDisplay.textContent += patternLines[currentLine] + '\n';
+                        currentLine++;
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 500); // Display a line every 500 milliseconds
+
+
+            // Play the background music
+            bgMusic.play().catch(e => {
+                console.log("Autoplay blocked:", e);
+                // Show play button if autoplay is blockeds
+                const playBtn = document.createElement('button');
+                playBtn.textContent = "Click to play the music";
+                playBtn.style.marginTop = "10px";
+                playBtn.onclick = () => bgMusic.play();
+                document.querySelector('.login-container').appendChild(playBtn);
+            });
+            
+        });
+
+        
+    </script>
+    
+    
+</body>
+</html>
